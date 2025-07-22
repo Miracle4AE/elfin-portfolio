@@ -101,7 +101,7 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
 
-  const projects: Project[] = [
+  const projects = useMemo((): Project[] => [
     {
       id: 1,
       title: t('portfolio.projects.techstart.title'),
@@ -183,7 +183,7 @@ export default function Portfolio() {
       tags: ['Social Media', 'Fashion', 'Content Strategy', 'Trending'],
       year: '2024'
     }
-  ];
+  ], [t]);
 
   const categories = [
     { id: 'all', name: t('portfolio.filters.all'), count: projects.length, icon: '🌟' },
