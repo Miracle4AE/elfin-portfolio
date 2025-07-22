@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: (...args: unknown[]) => void;
   }
 }
 
@@ -22,17 +22,6 @@ export default function Analytics() {
   }, [pathname]);
 
   useEffect(() => {
-    // Track page views
-    const trackPageView = () => {
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'page_view', {
-          page_title: document.title,
-          page_location: window.location.href,
-          page_path: pathname,
-        });
-      }
-    };
-
     // Track scroll depth
     const trackScrollDepth = () => {
       const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
@@ -47,7 +36,7 @@ export default function Analytics() {
     };
 
     // Track time on page
-    let startTime = Date.now();
+    const startTime = Date.now();
     const trackTimeOnPage = () => {
       const timeSpent = Math.round((Date.now() - startTime) / 1000);
       if (timeSpent >= 30) {

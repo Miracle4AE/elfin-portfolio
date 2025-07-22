@@ -8,7 +8,6 @@ export default function Hero() {
   const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -35,22 +34,10 @@ export default function Hero() {
       setMousePosition({ x, y: normalizedY });
     };
 
-    const handleMouseEnter = () => setIsHovered(true);
-    const handleMouseLeave = () => setIsHovered(false);
-
     window.addEventListener('mousemove', handleMouseMove);
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('mouseenter', handleMouseEnter);
-      container.addEventListener('mouseleave', handleMouseLeave);
-    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      if (container) {
-        container.removeEventListener('mouseenter', handleMouseEnter);
-        container.removeEventListener('mouseleave', handleMouseLeave);
-      }
     };
   }, []);
 

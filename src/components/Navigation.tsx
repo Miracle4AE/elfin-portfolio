@@ -94,7 +94,7 @@ export default function Navigation() {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden lg:flex items-center gap-16 absolute left-1/2 transform -translate-x-1/2">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => {
